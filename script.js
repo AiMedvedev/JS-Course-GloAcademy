@@ -1,7 +1,7 @@
 const title = 'New Project';
 const screens = [];
+const rollback = () => {};
 let screenPrice = 1500,
-    rollback = 20,
     fullPrice = 8000,
     adaptive = true;
 
