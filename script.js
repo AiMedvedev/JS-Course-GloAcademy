@@ -1,5 +1,5 @@
 const title = 'Project 24';
-const screens = 'Простые, Сложные, Интеративные';
+const screens = 'Простые, Сложные, Интерактивные';
 const rollback = 25;
 let screenPrice = 1500,
     fullPrice = 8000,
