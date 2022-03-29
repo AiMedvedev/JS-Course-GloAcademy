@@ -11,8 +11,9 @@ let service1 = prompt('Какой дополнительный тип услуг
 let servicePrice1 = +prompt('Сколько это будет стоить?');
 let service2 = prompt('Какой дополнительный тип услуги нужен?');
 let servicePrice2 = +prompt('Сколько это будет стоить?');
-let fullPrice = screenPrice + servicePrice1 + servicePrice2;  
-let servicePercentPrice = Math.ceil(fullPrice - fullPrice * (rollback / 100));
+let fullPrice;  
+let allServicePrices;
+let servicePercentPrice;
 
 
 const showTypeOf = function(variable) {
@@ -31,34 +32,36 @@ const getRollbackMessage = function(price) {
     }
 };
 
+const getAllServicePrices = function(a, b) {
+    return a + b;
+};
 
+function getFullPrice(screen, services) {
+    return screen + services;
+}
+
+function getTitle(title) {
+    title = title.trim();
+    title = title.toLowerCase();
+    title = title[0].toUpperCase() + title.substring(1);
+    return title;
+}
+
+function getServicePercentPrices(fullPrice, rollback) {
+    return Math.ceil(fullPrice - fullPrice * (rollback / 100));
+}
+
+
+allServicePrices = getAllServicePrices(servicePrice1, servicePrice2);
+fullPrice = getFullPrice(screenPrice, allServicePrices);
+servicePercentPrice = getServicePercentPrices(fullPrice, rollback);
 
 showTypeOf(title);
 showTypeOf(fullPrice);
 showTypeOf(adaptive);
 
 
-console.log(getRollbackMessage(fullPrice));
-
-console.log(screens.length);
-console.log(`Стоимость верстки экранов ${screenPrice} рублей`);
-console.log(`Стоимость разработки сайта ${fullPrice} рублей`);
 console.log(screens.toLowerCase().split(", "));
-console.log(`Процент отката посреднику за работу составляет ${fullPrice * (rollback/100)} рублей`);
-
-console.log(servicePercentPrice);
-
-// Вариант со switch что-то не срабатывает (выдает default):
-/* switch (fullPrice) {
-    case fullPrice >= 30000:
-        console.log('Даём скидку в 10%');
-        break
-    case fullPrice < 30000 && fullPrice >= 15000:
-        console.log('Даём скидку в 5%');
-        break
-    case fullPrice < 15000 && fullPrice > 0:
-        console.log('Скидка не предусмотрена');
-        break
-    default:
-        console.log('Что-то пошло не так');
-} */
+console.log(getRollbackMessage(fullPrice));
+console.log(getServicePercentPrices(fullPrice, rollback));
+console.log(getTitle(title));
