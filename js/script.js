@@ -30,10 +30,10 @@ const appData = {
             } 
             while (!appData.isNumber(price));
 
-            appData.screens.push({id: i, name: name, price: price});
+            appData.screens.push({id: i, name: name, price: +price});
         }
 
-        for (let i = 0; i < 2; i++) {
+        for (let i = 0; i < 2; i++) {                      
             let name;
             let price = 0;
 
@@ -47,16 +47,18 @@ const appData = {
             } 
             while (!appData.isNumber(price));
 
-            appData.services[name] = +price;
+            if (appData.services.hasOwnProperty(name)) {
+                appData.services[name + i] = +price;
+            } else {
+                appData.services[name] = +price;
+            }
         }
-
+        
         appData.adaptive = confirm('Нужен ли адаптив на сайте?');
     },
     addPrices: function() {
-        for (let screen of appData.screens) {
-            appData.screenPrice += +screen.price;
-        }
-
+        appData.screenPrice = appData.screens.reduce((sum, current) => (sum + current.price), 0);
+        
         for(let key in appData.services) {
             appData.allServicePrices += appData.services[key];
         }
@@ -65,7 +67,7 @@ const appData = {
         appData.fullPrice = +appData.screenPrice + appData.allServicePrices;
     },
     isNumber: function(num) {                         
-        return !isNaN(parseFloat(num)) && isFinite(num);  // проверка на число
+        return !isNaN(parseFloat(num)) && isFinite(num); 
     },
     getRollbackMessage: function(price) {
         if (price >= 30000) {
@@ -85,9 +87,13 @@ const appData = {
         appData.servicePercentPrice = Math.ceil(appData.fullPrice - appData.fullPrice * (appData.rollback / 100));
     },
     logger: function() {
-        console.log(appData.fullPrice);
+        console.log(appData.services);
+        console.log(appData.screenPrice);
+        console.log(appData.allServicePrices);
         console.log(appData.servicePercentPrice);
         console.log(appData.screens);
+        console.log(appData.services);
+        
     },
     start: function() {
         appData.asking();
