@@ -1,5 +1,21 @@
 'use strict';
 
+const title = document.getElementsByTagName('h1')[0];
+const calculateBtn = document.getElementsByClassName('handler_btn')[0];
+const resetBtn = document.getElementsByClassName('handler_btn')[1];
+const plusBtn = document.querySelector('.screen-btn');
+const percentItems = document.querySelectorAll('.other-items.percent');
+const numberItems = document.querySelectorAll('.other-items.number');
+const rollbackSlider = document.querySelector('.rollback input');
+const rangeValue = document.querySelector('.rollback .range-value');
+const totalInput1 = document.getElementsByClassName('total-input').item(0);
+const totalInput2 = document.getElementsByClassName('total-input').item(1);
+const totalInput3 = document.getElementsByClassName('total-input').item(2);
+const totalInput4 = document.getElementsByClassName('total-input').item(3);
+const totalInput5 = document.getElementsByClassName('total-input').item(4);
+let screenBlocks = document.querySelectorAll('.screen');
+
+
 const appData = {
     title: '',
     screens: [],
@@ -87,12 +103,12 @@ const appData = {
         appData.servicePercentPrice = Math.ceil(appData.fullPrice - appData.fullPrice * (appData.rollback / 100));
     },
     logger: function() {
-        console.log(appData.services);
+        /* console.log(appData.services);
         console.log(appData.screenPrice);
         console.log(appData.allServicePrices);
         console.log(appData.servicePercentPrice);
         console.log(appData.screens);
-        console.log(appData.services);
+        console.log(appData.services); */
         
     },
     start: function() {
@@ -106,4 +122,4 @@ const appData = {
 };
 
 
-appData.start();
+//appData.start();
