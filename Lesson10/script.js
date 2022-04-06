@@ -1,5 +1,4 @@
 const books = document.querySelectorAll('.book');
-//const book = document.querySelectorAll('.book');
 const book3Header = books[4].querySelector('h2 a');
 const body = document.querySelector('body');
 const adv = document.querySelector('.adv');
@@ -30,5 +29,3 @@ chaptersBook5[7].after(chaptersBook5[5]);
 chapter8.textContent = 'Глава 8: За пределами ES6';
 books[2].append(chaptersBook6[9].before(chapter8));
 
-
-console.log(chaptersBook6);
