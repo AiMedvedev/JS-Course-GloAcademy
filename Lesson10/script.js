@@ -27,5 +27,5 @@ chaptersBook5[4].after(chaptersBook5[2]);
 chaptersBook5[7].after(chaptersBook5[5]);
 
 chapter8.textContent = 'Глава 8: За пределами ES6';
-books[2].append(chaptersBook6[9].before(chapter8));
-
+books[2].append(chapter8);
+chaptersBook6[9].before(chapter8);
