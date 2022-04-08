@@ -26,6 +26,17 @@ const appData = {
     fullPrice: 0,  
     allServicePrices: 0,
     servicePercentPrice: 0,
+    init: function() {
+        appData.start();
+    },
+    start: function() {
+        appData.asking();
+        appData.addPrices();
+        appData.getFullPrice();
+        appData.getServicePercentPrice();
+        appData.getTitle();
+        appData.logger();
+    },
     asking: function() {
         do {
             appData.title = prompt('Как называется ваш проект?');
@@ -109,17 +120,8 @@ const appData = {
         console.log(appData.servicePercentPrice);
         console.log(appData.screens);
         console.log(appData.services); */
-        
-    },
-    start: function() {
-        appData.asking();
-        appData.addPrices();
-        appData.getFullPrice();
-        appData.getServicePercentPrice();
-        appData.getTitle();
-        appData.logger();
     },
 };
 
 
-//appData.start();
+appData.start();
