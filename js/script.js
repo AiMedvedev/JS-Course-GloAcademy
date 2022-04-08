@@ -21,6 +21,7 @@ let screensAmount = document.querySelectorAll('.main-controls__input');
 const appData = {
     title: '',
     screens: [],
+    screensTotalAmount: 0,
     rollback: 25,
     screenPrice: 0,
     adaptive: true,
@@ -34,6 +35,8 @@ const appData = {
         appData.addTitle();
         plusBtn.addEventListener('click', appData.addScreenBlock);
 
+
+        
         
 
         rollbackSlider.addEventListener('input', function() {
@@ -42,7 +45,7 @@ const appData = {
             return appData.rollback;
         });
 
-
+        
 
         calculateBtn.addEventListener('click', function () {
 
@@ -75,6 +78,7 @@ const appData = {
             } else {
                 alert('Выберите тип экрана и их количество!');
             }
+            
         });
             
     },
@@ -97,9 +101,8 @@ const appData = {
         /*
         appData.getServicePercentPrice();
         appData.logger(); */
-        console.log(appData.rollback);
-        console.log(appData.servicePercentPrice);
-        //console.log(appData);
+        
+        console.log(appData);
     },
     addScreens: function () {
         screenBlocks = document.querySelectorAll('.screen');
@@ -108,11 +111,13 @@ const appData = {
             const select = screen.querySelector('select');
             const input = screen.querySelector('input');
             const selectName = select.options[select.selectedIndex].textContent;
+            const amount = +input.value;
 
             appData.screens.push({
                 id: index,
                 name: selectName,
-                price: +select.value * +input.value
+                price: +select.value * +input.value,
+                amount: amount
             });
         });
     },
@@ -151,15 +156,15 @@ const appData = {
         appData.fullPrice = +appData.screenPrice + appData.servicePricesPercent + appData.servicePricesNumber;
 
         appData.servicePercentPrice = appData.fullPrice - (appData.fullPrice * (appData.rollback / 100));
-        
-        totalCountRollback.value = appData.servicePercentPrice;
+
+        appData.screensTotalAmount = appData.screens.reduce((sum, current) => (sum + current.amount), 0);
     },
     showResult: function () {
         total.value = appData.screenPrice;
-        totalCount.value = appData.screens.length;
+        totalCount.value = appData.screensTotalAmount;
         totalCountOther.value = appData.servicePricesNumber + appData.servicePricesPercent;
         fullTotalCount.value = appData.fullPrice;
-
+        totalCountRollback.value = appData.servicePercentPrice;
     },
     getRollbackMessage: function (price) {
         if (price >= 30000) {
