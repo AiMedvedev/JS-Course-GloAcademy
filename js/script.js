@@ -41,9 +41,8 @@ const appData = {
             return appData.rollback;
         });
 
-
         calculateBtn.addEventListener('click', function () {
-            
+
             screenBlocks = document.querySelectorAll('main-controls__item .screen');
             let screenType = document.querySelectorAll('.screen .main-controls__select');
             let screensAmount = document.querySelectorAll('.screen .main-controls__input');
@@ -67,24 +66,19 @@ const appData = {
                 }
             });
 
-
             if (selectTypeError !== 'Тип экранов' && inputError !== '') {
                 appData.start();
             } else {
                 alert('Выберите тип экрана и их количество!');
             }
-
         });
-
     },
     addTitle: function () {
         document.title = title.textContent;
     },
     addScreenBlock: function () {
         const screenClone = screenBlocks[0].cloneNode(true);
-
         plusBtn.before(screenClone);
-
     },
     start: function () {
         appData.addScreens();
@@ -92,12 +86,6 @@ const appData = {
         appData.addPrices();
         appData.showResult();
         appData.reset();
-
-        /*
-        appData.getServicePercentPrice();
-        appData.logger(); */
-
-        console.log(appData);
     },
     addScreens: function () {
         screenBlocks = document.querySelectorAll('.screen');
@@ -161,18 +149,7 @@ const appData = {
         fullTotalCount.value = appData.fullPrice;
         totalCountRollback.value = appData.servicePercentPrice;
     },
-    getRollbackMessage: function (price) {
-        if (price >= 30000) {
-            return 'Даём скидку в 10%';
-        } else if (price < 30000 && price >= 15000) {
-            return 'Даём скидку в 5%';
-        } else if (price < 15000 && price >= 0) {
-            return 'Скидка не предусмотрена';
-        } else {
-            return 'Что-то пошло не так';
-        }
-    },
-    reset: function() {
+    reset: function () {
         appData.screens = [];
         appData.screenPrice = 0;
         appData.screensTotalAmount = 0;
@@ -182,8 +159,7 @@ const appData = {
         appData.servicePercentPrice = 0;
     },
     logger: function () {
-        /* console.log(appData.services);
-        console.log(appData.services); */
+        console.log(appData);
     },
 };
 
