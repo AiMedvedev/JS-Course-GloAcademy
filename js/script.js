@@ -35,7 +35,6 @@ const appData = {
         appData.addTitle();
         plusBtn.addEventListener('click', appData.addScreenBlock);
 
-
         rollbackSlider.addEventListener('input', function () {
             rangeValue.textContent = `${rollbackSlider.value}%`;
             appData.rollback = +rollbackSlider.value;
@@ -44,7 +43,7 @@ const appData = {
 
 
         calculateBtn.addEventListener('click', function () {
-
+            
             screenBlocks = document.querySelectorAll('main-controls__item .screen');
             let screenType = document.querySelectorAll('.screen .main-controls__select');
             let screensAmount = document.querySelectorAll('.screen .main-controls__input');
@@ -88,11 +87,11 @@ const appData = {
 
     },
     start: function () {
-
         appData.addScreens();
         appData.addServices();
         appData.addPrices();
         appData.showResult();
+        appData.reset();
 
         /*
         appData.getServicePercentPrice();
@@ -173,15 +172,17 @@ const appData = {
             return 'Что-то пошло не так';
         }
     },
-    /* getServicePercentPrice: function () {
-        totalCountRollback.innerHTML = Math.ceil(appData.fullPrice - appData.fullPrice * (appData.rollback / 100));
-    }, */
+    reset: function() {
+        appData.screens = [];
+        appData.screenPrice = 0;
+        appData.screensTotalAmount = 0;
+        appData.servicePricesNumber = 0;
+        appData.servicePricesPercent = 0;
+        appData.fullPrice = 0;
+        appData.servicePercentPrice = 0;
+    },
     logger: function () {
         /* console.log(appData.services);
-        console.log(appData.screenPrice);
-        console.log(appData.allServicePrices);
-        console.log(appData.servicePercentPrice);
-        console.log(appData.screens);
         console.log(appData.services); */
     },
 };
