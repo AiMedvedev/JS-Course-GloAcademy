@@ -36,16 +36,12 @@ const appData = {
         plusBtn.addEventListener('click', appData.addScreenBlock);
 
 
-        
-        
-
-        rollbackSlider.addEventListener('input', function() {
-            rangeValue.textContent =  `${rollbackSlider.value}%`;
+        rollbackSlider.addEventListener('input', function () {
+            rangeValue.textContent = `${rollbackSlider.value}%`;
             appData.rollback = +rollbackSlider.value;
             return appData.rollback;
         });
 
-        
 
         calculateBtn.addEventListener('click', function () {
 
@@ -55,15 +51,15 @@ const appData = {
             let selectTypeError;
             let inputError;
 
-            screenType.forEach(function(screen) {
+            screenType.forEach(function (screen) {
                 const select = screen.querySelector('select');
                 if (select.options[select.selectedIndex].textContent === 'Тип экранов') {
-                    let selectTypeError = select.options[select.selectedIndex].textContent;
+                    selectTypeError = select.options[select.selectedIndex].textContent;
                     return selectTypeError;
                 }
             });
 
-            screensAmount.forEach(function(screen) {
+            screensAmount.forEach(function (screen) {
                 const input = screen.querySelector('input');
 
                 if (input.value === '') {
@@ -78,9 +74,9 @@ const appData = {
             } else {
                 alert('Выберите тип экрана и их количество!');
             }
-            
+
         });
-            
+
     },
     addTitle: function () {
         document.title = title.textContent;
@@ -101,7 +97,7 @@ const appData = {
         /*
         appData.getServicePercentPrice();
         appData.logger(); */
-        
+
         console.log(appData);
     },
     addScreens: function () {
