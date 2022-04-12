@@ -51,7 +51,7 @@ const appData = {
             let selectTypeError;
             let inputError;
 
-            screenType.forEach( screen => {
+            screenType.forEach(screen => {
                 const select = screen.querySelector('select');
                 if (select.options[select.selectedIndex].textContent === 'Тип экранов') {
                     selectTypeError = select.options[select.selectedIndex].textContent;
@@ -59,7 +59,7 @@ const appData = {
                 }
             });
 
-            screensAmount.forEach( screen => {
+            screensAmount.forEach(screen => {
                 const input = screen.querySelector('input');
 
                 if (input.value === '') {
@@ -77,18 +77,18 @@ const appData = {
 
         const disable = () => {
             plusBtn.setAttribute('disabled', true);
-            
+
             allInput = document.querySelectorAll('input');
             allSelect = document.querySelectorAll('select');
 
             allInput.forEach((item) => {
                 item.setAttribute('disabled', true);
             });
-            
+
             allSelect.forEach((item) => {
                 item.setAttribute('disabled', true);
             });
-            
+
             resetBtn.style.display = 'block';
             calculateBtn.style.display = 'none';
         };
@@ -98,14 +98,14 @@ const appData = {
             allSelect = document.querySelectorAll('select');
             screenBlocks = document.querySelectorAll('.main-controls__item.screen');
             let screenInput = document.querySelector('.main-controls__item.screen input');
-            let screenDecr = document.querySelectorAll('.main-controls__select select option');
-            
+            let screenDecr = document.querySelector('.main-controls__select select');
+
             plusBtn.removeAttribute('disabled');
-            
+
             allInput.forEach((item) => {
                 item.removeAttribute('disabled');
             });
-            
+
             allSelect.forEach((item) => {
                 item.removeAttribute('disabled');
             });
@@ -113,22 +113,13 @@ const appData = {
             for (let i = 1; i < screenBlocks.length; i++) {
                 screenBlocks[i].parentNode.removeChild(screenBlocks[i]);
             }
-            screenInput.value = '';
-            console.log(screenDecr[0]);
-            //screenDecr.value = '';
-            //screenDecr.option[0].setAttribute('selected');
-            //.option[0].value = '';
-            
 
+            screenDecr.selectedIndex = 0;
+            screenInput.value = '';
+        
             resetBtn.style.display = 'none';
             calculateBtn.style.display = 'block';
 
-           
-            /* screenBlocks.input.value = '';
-            screenType.value = '';
-            screenBlocks.option.value = ''; */
-           
-            
             appData.reset();
             appData.showResult();
         };
@@ -171,7 +162,7 @@ const appData = {
         });
     },
     addServices: function () {
-        percentItems.forEach( item => {
+        percentItems.forEach(item => {
             const check = item.querySelector('input[type=checkbox]');
             const label = item.querySelector('label');
             const input = item.querySelector('input[type=text]');
@@ -183,7 +174,7 @@ const appData = {
             }
         });
 
-        numberItems.forEach( item => {
+        numberItems.forEach(item => {
             const check = item.querySelector('input[type=checkbox]');
             const label = item.querySelector('label');
             const input = item.querySelector('input[type=text]');
