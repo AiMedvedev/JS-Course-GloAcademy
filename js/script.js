@@ -125,27 +125,16 @@ const appData = {
             screenDecr.selectedIndex = 0;
             screenInput.value = '';
         
-            resetBtn.style.display = 'none';
-            calculateBtn.style.display = 'block';
-            cmsVariants.style.display = 'none';
-            cmsOthers.style.display = 'none';
-
-            inputCheckbox.forEach((item) => {
-                item.style.checked = 'unchecked';
-            });
+            
 
             appData.reset();
             appData.showResult();
         };
 
         calculateBtn.addEventListener('click', calculateAll);
-
-        calculateBtn.addEventListener('click', disable);
-
-        resetBtn.addEventListener('click', enable);
-
         
-
+        calculateBtn.addEventListener('click', disable);
+        resetBtn.addEventListener('click', enable);
 
         cmsBtn.addEventListener('click', () => {
             cmsVariants.style.display = 'flex';
@@ -156,7 +145,6 @@ const appData = {
                 cmsOthers.style.display = 'flex';
             }
         });
-
     },
     addTitle: function () {
         document.title = title.textContent;
@@ -255,6 +243,17 @@ const appData = {
         this.fullPrice = 0;
         this.servicePercentPrice = 0;
 
+        resetBtn.style.display = 'none';
+        calculateBtn.style.display = 'block';
+        cmsVariants.style.display = 'none';
+        cmsOthers.style.display = 'none';
+
+        inputCheckbox.forEach((item) => {
+            item.checked = false;
+        });
+
+        rollbackSlider.value = 0;
+        rangeValue.textContent = 0;
     },
     logger: function () {
         console.log(appData);
