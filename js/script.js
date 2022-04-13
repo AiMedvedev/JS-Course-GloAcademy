@@ -42,9 +42,11 @@ const appData = {
     servicePricesPercent: 0,
     servicePricesNumber: 0,
     servicePercentPrice: 0,
+    
     init: function () {
 
-        appData.addTitle();
+        this.addTitle();
+
         plusBtn.addEventListener('click', this.addScreenBlock);
 
         rollbackSlider.addEventListener('input', () => {
@@ -53,88 +55,9 @@ const appData = {
             return this.rollback;
         });
 
-        const calculateAll = () => {
-            let screenType = document.querySelectorAll('.screen .main-controls__select');
-            let screensAmount = document.querySelectorAll('.screen .main-controls__input');
-            let selectTypeError;
-            let inputError;
+        calculateBtn.addEventListener('click', this.valuesCheck);
 
-            screenType.forEach(screen => {
-                const select = screen.querySelector('select');
-                if (select.options[select.selectedIndex].textContent === 'Тип экранов') {
-                    selectTypeError = select.options[select.selectedIndex].textContent;
-                    return selectTypeError;
-                }
-            });
-
-            screensAmount.forEach(screen => {
-                const input = screen.querySelector('input');
-
-                if (input.value === '') {
-                    inputError = input.value;
-                    return inputError;
-                }
-            });
-
-            if (selectTypeError !== 'Тип экранов' && inputError !== '') {
-                this.start();
-            } else {
-                alert('Выберите тип экрана и их количество!');
-            }
-        };
-
-        const disable = () => {
-            plusBtn.setAttribute('disabled', true);
-
-            allInput = document.querySelectorAll('input');
-            allSelect = document.querySelectorAll('select');
-
-            allInput.forEach((item) => {
-                item.setAttribute('disabled', true);
-            });
-
-            allSelect.forEach((item) => {
-                item.setAttribute('disabled', true);
-            });
-
-            resetBtn.style.display = 'block';
-            calculateBtn.style.display = 'none';
-        };
-
-        const enable = () => {
-            allInput = document.querySelectorAll('input');
-            allSelect = document.querySelectorAll('select');
-            screenBlocks = document.querySelectorAll('.main-controls__item.screen');
-            let screenInput = document.querySelector('.main-controls__item.screen input');
-            let screenDecr = document.querySelector('.main-controls__select select');
-
-            plusBtn.removeAttribute('disabled');
-
-            allInput.forEach((item) => {
-                item.removeAttribute('disabled');
-            });
-
-            allSelect.forEach((item) => {
-                item.removeAttribute('disabled');
-            });
-
-            for (let i = 1; i < screenBlocks.length; i++) {
-                screenBlocks[i].parentNode.removeChild(screenBlocks[i]);
-            }
-
-            screenDecr.selectedIndex = 0;
-            screenInput.value = '';
-        
-            
-
-            appData.reset();
-            appData.showResult();
-        };
-
-        calculateBtn.addEventListener('click', calculateAll);
-        
-        calculateBtn.addEventListener('click', disable);
-        resetBtn.addEventListener('click', enable);
+        resetBtn.addEventListener('click', this.enable);
 
         cmsBtn.addEventListener('click', () => {
             cmsVariants.style.display = 'flex';
@@ -145,6 +68,82 @@ const appData = {
                 cmsOthers.style.display = 'flex';
             }
         });
+    },
+    
+    valuesCheck: function () {
+        let screenType = document.querySelectorAll('.screen .main-controls__select');
+        let screensAmount = document.querySelectorAll('.screen .main-controls__input');
+        let selectTypeError;
+        let inputError;
+
+        screenType.forEach(screen => {
+            const select = screen.querySelector('select');
+            if (select.options[select.selectedIndex].textContent === 'Тип экранов') {
+                selectTypeError = select.options[select.selectedIndex].textContent;
+                return selectTypeError;
+            }
+        });
+
+        screensAmount.forEach(screen => {
+            const input = screen.querySelector('input');
+
+            if (input.value === '') {
+                inputError = input.value;
+                return inputError;
+            }
+        });
+
+        if (selectTypeError !== 'Тип экранов' && inputError !== '') {
+            appData.start();
+            appData.disable();
+        } else {
+            alert('Выберите тип экрана и их количество!');
+            return;
+        }
+    },
+    enable: function () {
+        allInput = document.querySelectorAll('input');
+        allSelect = document.querySelectorAll('select');
+        screenBlocks = document.querySelectorAll('.main-controls__item.screen');
+        let screenInput = document.querySelector('.main-controls__item.screen input');
+        let screenDecr = document.querySelector('.main-controls__select select');
+
+        plusBtn.removeAttribute('disabled');
+
+        allInput.forEach((item) => {
+            item.removeAttribute('disabled');
+        });
+
+        allSelect.forEach((item) => {
+            item.removeAttribute('disabled');
+        });
+
+        for (let i = 1; i < screenBlocks.length; i++) {
+            screenBlocks[i].parentNode.removeChild(screenBlocks[i]);
+        }
+
+        screenDecr.selectedIndex = 0;
+        screenInput.value = '';
+    
+        appData.reset();
+        appData.showResult();
+    },
+    disable: function () {
+        plusBtn.setAttribute('disabled', true);
+
+        allInput = document.querySelectorAll('input');
+        allSelect = document.querySelectorAll('select');
+
+        allInput.forEach((item) => {
+            item.setAttribute('disabled', true);
+        });
+
+        allSelect.forEach((item) => {
+            item.setAttribute('disabled', true);
+        });
+
+        resetBtn.style.display = 'block';
+        calculateBtn.style.display = 'none';
     },
     addTitle: function () {
         document.title = title.textContent;
@@ -158,7 +157,7 @@ const appData = {
         this.addServices();
         this.addPrices();
         this.showResult();
-        this.reset();
+        //this.reset();
     },
     addScreens: function () {
         screenBlocks = document.querySelectorAll('.screen');
