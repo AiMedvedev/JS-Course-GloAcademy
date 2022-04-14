@@ -55,9 +55,9 @@ const appData = {
             return this.rollback;
         });
 
-        calculateBtn.addEventListener('click', this.valuesCheck);
+        calculateBtn.addEventListener('click', this.valuesCheck.bind(appData));
 
-        resetBtn.addEventListener('click', this.enable);
+        resetBtn.addEventListener('click', this.enable.bind(appData));
 
         cmsBtn.addEventListener('click', () => {
             cmsVariants.style.display = 'flex';
@@ -94,8 +94,8 @@ const appData = {
         });
 
         if (selectTypeError !== 'Тип экранов' && inputError !== '') {
-            appData.start();
-            appData.disable();
+            this.start();
+            this.disable();
         } else {
             alert('Выберите тип экрана и их количество!');
             return;
@@ -125,8 +125,8 @@ const appData = {
         screenDecr.selectedIndex = 0;
         screenInput.value = '';
     
-        appData.reset();
-        appData.showResult();
+        this.reset();
+        this.showResult();
     },
     disable: function () {
         plusBtn.setAttribute('disabled', true);
@@ -157,7 +157,6 @@ const appData = {
         this.addServices();
         this.addPrices();
         this.showResult();
-        //this.reset();
     },
     addScreens: function () {
         screenBlocks = document.querySelectorAll('.screen');
@@ -202,7 +201,7 @@ const appData = {
         });
     },
     addPrices: function () {
-        const isNumber = function(num) {                         
+        const isNumber = num => {                         
             return !isNaN(parseFloat(num)) && isFinite(num);  
         };
         
@@ -217,7 +216,8 @@ const appData = {
         }
 
         if (isNumber(cmsOtherValue.value)) {
-            this.fullPrice = (1 + cmsOtherValue.value / 100) * (+this.screenPrice + this.servicePricesPercent + this.servicePricesNumber);
+            this.fullPrice = (1 + cmsOtherValue.value / 100) * 
+            (+this.screenPrice + this.servicePricesPercent + this.servicePricesNumber);
         } else {
             this.fullPrice = +this.screenPrice + this.servicePricesPercent + this.servicePricesNumber;
         }
@@ -250,12 +250,12 @@ const appData = {
         inputCheckbox.forEach((item) => {
             item.checked = false;
         });
-
+        console.log(inputCheckbox);
         rollbackSlider.value = 0;
         rangeValue.textContent = 0;
     },
     logger: function () {
-        console.log(appData);
+        console.log(this);
     },
 };
 
