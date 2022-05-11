@@ -100,6 +100,10 @@ const appData = {
             alert('Выберите тип экрана и их количество!');
             return;
         }
+
+        rollbackSlider.addEventListener('input', () => {
+            totalCountRollback.value = this.fullPrice - (this.fullPrice * (this.rollback / 100));
+        });
     },
     enable: function () {
         allInput = document.querySelectorAll('input');
@@ -141,6 +145,8 @@ const appData = {
         allSelect.forEach((item) => {
             item.setAttribute('disabled', true);
         });
+
+        rollbackSlider.removeAttribute('disabled');
 
         resetBtn.style.display = 'block';
         calculateBtn.style.display = 'none';
