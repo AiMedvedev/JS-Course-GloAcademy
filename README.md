@@ -1,4 +1,4 @@
-# JS-Course
+# JS-Course-GloAcademy
 
 Учебный проект "Калькулятор верстки".
 
