@@ -2,4 +2,7 @@
 
 Учебный проект "Калькулятор верстки".
 
-Используются: HTML, JavaScript, OOP.
+## Запуск
+
+https://markup-calculator-glo-academy.vercel.app/
+
